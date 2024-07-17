@@ -4,6 +4,7 @@ import com.scaler.ProductService.dtos.FakeStoreProductDto;
 import com.scaler.ProductService.exceptions.ProductNotFoundException;
 import com.scaler.ProductService.models.Category;
 import com.scaler.ProductService.models.Product;
+import org.springframework.context.annotation.Primary;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpMessageConverterExtractor;
