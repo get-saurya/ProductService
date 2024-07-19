@@ -7,7 +7,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-//import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -15,8 +14,9 @@ import java.util.List;
 public class ProductController {
     private ProductService productService;
 
-    public ProductController(ProductService productService) {
-        this.productService=productService;
+    public ProductController(@Qualifier("selfProductService")
+                             ProductService productService) {
+        this.productService = productService;
     }
 
     //http://localhost:8080/products/10
@@ -57,13 +57,14 @@ public class ProductController {
         return productService.getAllProducts();
     }
 
-    public void deleteProduct(Long productId) {
-
+    @DeleteMapping("/{id}")
+    public void deleteProduct(@PathVariable("id") Long productId) {
+        productService.deleteProduct(productId);
     }
 
     //PATCH -> http://localhost:8080/products/1
     @PatchMapping("/{id}")
-    public Product updateProduct(@PathVariable("id") Long id, @RequestBody Product product) {
+    public Product updateProduct(@PathVariable("id") Long id, @RequestBody Product product) throws ProductNotFoundException {
        return productService.updateProduct(id, product);
     }
 
@@ -81,4 +82,9 @@ public class ProductController {
     //
     //        return response;
     //    }
+
+    @PostMapping
+    public Product addNewProduct(@RequestBody Product product) {
+        return productService.addProduct(product);
+    }
 }

@@ -14,11 +14,13 @@ import org.springframework.web.client.RestTemplate;
 import java.util.ArrayList;
 import java.util.List;
 
-@Service
+@Service("fakeStoreProductService")
+//@Primary
 public class FakeStoreProductService implements ProductService {
     private RestTemplate restTemplate;
 
     public FakeStoreProductService(RestTemplate restTemplate) {
+
         this.restTemplate = restTemplate;
     }
 
@@ -91,6 +93,11 @@ public class FakeStoreProductService implements ProductService {
     @Override
     public void deleteProduct(Long id) {
 
+    }
+
+    @Override
+    public Product addProduct(Product product) {
+        return null;
     }
 
 
