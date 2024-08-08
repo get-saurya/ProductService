@@ -2,6 +2,8 @@ package com.scaler.ProductService.repositories;
 
 import com.scaler.ProductService.models.Product;
 import com.scaler.ProductService.projections.ProductWithIdAndTitle;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -18,7 +20,8 @@ public interface ProductRepository extends JpaRepository<Product, Long > {
    Optional<Product> findById(Long id);
 
    @Override
-   List<Product> findAll(Sort sort);
+   //List<Product> findAll(Sort sort);
+   Page<Product> findAll(Pageable pageable);
 
    //HQL
    @Query("select p.id as id, p.title as title from Product p where p.id = 1")
